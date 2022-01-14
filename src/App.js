@@ -12,7 +12,11 @@ function App() {
 
            <div style={{dispaly:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(300px, 1fr))", gap:"1rem" ,alignItems:"flex-start"}}>           
            </div>
-           <BudgetCard name="entertainment" amount={200} max={1000}></BudgetCard>
+           <BudgetCard name="entertainment" 
+           gray
+           amount={700} 
+           max={1000}
+           ></BudgetCard>
       </Container>
   );
 }
