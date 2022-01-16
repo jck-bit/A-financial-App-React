@@ -1,5 +1,6 @@
 import { Button, Card,ProgressBar, Stack } from 'react-bootstrap'
 import { currencyFormatter } from './utils'
+import './index.css'
  
 export default function BudgetCard({name, amount, max, gray}) {
     const classNames = []
@@ -10,6 +11,7 @@ export default function BudgetCard({name, amount, max, gray}) {
         }
     
     return (
+    <div className='Come'>
       <Card className={classNames.join(" ")}>
           <Card.Body>
               <Card.Title className='d-flex justify-content-between
@@ -34,6 +36,7 @@ export default function BudgetCard({name, amount, max, gray}) {
               </Stack>
           </Card.Body>
       </Card>
+      </div>
     )
 }
 

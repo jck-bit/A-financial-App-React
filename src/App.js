@@ -2,9 +2,13 @@ import  { Button, Container, Stack }  from 'react-bootstrap'
 import AddBudgetModal from './components/AddBudgetModal';
 import BudgetCard from './components/BudgetCard';
 import{useState} from 'react'
+import { useBudgets } from './contexts/BudgetsContext';
+
+
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
+  const {budgets } = useBudgets()
   return (
     <>
       <Container className='my-4'>
@@ -14,13 +18,22 @@ function App() {
              <Button variant='outline-primary'>Add Expense</Button>
            </Stack>
 
-           <div style={{dispaly:"grid", gridTemplateColumns:"repeat(auto-fill,minmax(300px, 1fr))", gap:"1rem" ,alignItems:"flex-start"}}>           
+           <div style={{dispaly:"grid", 
+           gridTemplateColumns:"repeat(auto-fill,minmax(300px, 1fr))", 
+           gap:"1rem" ,alignItems:"flex-start"}}>           
            
-           <BudgetCard name="Entertainment" 
-           gray
-           amount={500} 
-           max={1000}
-           ></BudgetCard>
+
+           {budgets.map(budget =>{
+               return (
+               <BudgetCard 
+               key={budget.id}
+               name= {budget.name}
+               amount={budget.amount} 
+               max={budget.max}
+               />
+           )
+  })}
+          
            </div>
       </Container>
       <AddBudgetModal
