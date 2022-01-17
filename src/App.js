@@ -9,14 +9,23 @@ import { useBudgets } from './contexts/BudgetsContext';
 
 function App() {
   const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
+  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+  const [AddExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState()
+  
   const {budgets, getBudgetExpenses} = useBudgets()
+
+
+  function openAddExpenseModal(budgetId) {
+    setShowAddExpenseModal(true)
+    setAddExpenseModalBudgetId(budgetId)
+  }
   return (
     <>
       <Container className='my-4'>
            <Stack direction='horizontal' gap ='2' className='mb-4'>
              <h1 className='me-auto'>Budget</h1>
              <Button variant="primary" onClick={() => setShowAddBudgetModal(true)}>Add Budget</Button>
-             <Button variant='outline-primary'>Add Expense</Button>
+             <Button variant='outline-primary' onClick={openAddExpenseModal}>Add Expense</Button>
            </Stack>
 
            <div style={{dispaly:"grid", 
@@ -35,13 +44,14 @@ function App() {
                 name={budget.name}
                 amount={amount}
                 max={budget.max}
-                // onAddExpenseClick={() => openAddExpenseModal(budget.id)}
+                onAddExpenseClick={() => openAddExpenseModal(budget.id)}
                 // onViewExpensesClick={() =>
                 //   setViewExpensesModalBudgetId(budget.id)
                 // }
               />
             )
-          })}              
+          })}   
+          <UncategorizedBudgetCard/>           
            </div>
       </Container>
       <AddBudgetModal
@@ -49,9 +59,10 @@ function App() {
         handleClose={() => setShowAddBudgetModal(false)}
       />
       <AddExpenseModal
-        show={true}
-      //   handleClose={() => setShowAddBudgetModal(false)}
-      // 
+        show={showAddExpenseModal}
+        defaultBudgetId={AddExpenseModalBudgetId}
+        handleClose={() => setShowAddExpenseModal(false)}
+      
       />
     </>
   );
