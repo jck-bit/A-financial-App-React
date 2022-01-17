@@ -9,7 +9,7 @@ export default function BudgetCard({name, amount, max, gray}) {
         }else if(gray){
             classNames.push("bg-light")
         }
-    
+        
     return (
     <div className='Come'>
       <Card className={classNames.join(" ")}>
